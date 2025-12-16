@@ -1,0 +1,268 @@
+:root{
+  --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
+  --bg:#ffffff; --accent:#a21caf; --primary:#e6057f;
+  --radius:18px; --shadow-sm:0 4px 16px rgba(0,0,0,.08);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5;}
+img{max-width:100%;display:block}
+.container{width:min(1160px,92%);margin-inline:auto}
+.section{padding:clamp(56px,7vw,96px) 0}
+.center{text-align:center}
+.display{font-family:Outfit,Inter,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.04;font-size:clamp(32px,6.5vw,56px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.9rem 1.2rem;border-radius:999px;font-weight:700;text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn-primary{background:var(--primary);color:#fff;border:none;box-shadow:0 14px 30px rgba(109,40,217,.25)}
+.btn-sm{padding:.55rem .9rem;font-size:.95rem;font-weight:600}
+
+/* Header scroll behaviour with shrink */
+.site-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: transparent;
+  border: none;
+  z-index: 50;
+  transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+  padding: 18px 0;
+}
+
+
+.site-header .brand {
+  margin-left: 25px; /* adjust as needed (20–60px typical) */
+}
+
+
+.site-header .brand-logo {
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+/* When scrolled: solid white and slightly smaller */
+.site-header.solid {
+  position: fixed;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 8px 0; /* reduces header height */
+}
+
+/* Shrink logo when scrolled */
+.site-header.solid .brand-logo {
+  width: 240px;  /* smaller width */
+  height: 96px;  /* smaller height */
+}
+
+
+.brand-logo.large{width:320px;height:128px}
+.contact-only{margin-left:auto}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+
+/* Hero */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 60vh;         /* existing */
+  padding-top: 135px;       /* 👈 pushes content down below the header */
+  padding-bottom: 70px;    /* increase from 60px or similar */
+  display: flex;
+  align-items: center;      /* centers vertically within hero */
+}
+
+.hero-bg {
+  position: absolute; inset: 0; 
+  z-index: 0; 
+  overflow: hidden;
+  pointer-events: none;         /* video won't block links */
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1.35) saturate(0.7); /* brighter and less color-saturated */
+  transform: scale(1.02); /* subtle zoom to avoid hard edges */
+}
+
+.hero-bg video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9);
+  opacity: 0.55;
+}
+
+.hero-inner {
+  position: relative;
+  padding-left: 62px;  /* moves the whole hero content right */
+  z-index: 2; /* ensures text overlays the video */
+}
+
+/* If you use an overlay, keep it BELOW the text */
+.hero-bg::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient( to bottom right, rgba(255,255,255,.7), rgba(255,255,255,.35) );
+  z-index: 1;                   /* overlay between video (0) and content (2) */
+}
+
+
+.hero-copy .lede {
+  color: #111827;
+  max-width:62ch;
+  margin:12px 0 18px;
+
+  /* subtle white shadow for legibility */
+  text-shadow: 
+    0 2px 8px rgba(255, 255, 255, 0.8),
+    0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+/* Bullet list with hanging indent so text lines up perfectly */
+.hero-points{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: #1f2937;
+}
+
+.hero-points li{
+  position: relative;
+  padding-left: 2rem;     /* controls where the text column starts */
+  margin: 0 0 .35rem 0;   /* space between items */
+  line-height: 1.5;
+}
+
+.hero-points li i{
+  position: absolute;
+  left: 0;                /* icon column */
+  top: .2em;              /* vertical tweak to align with first text line */
+  width: 1.25rem;         /* fixed icon column width */
+  text-align: center;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+
+
+/* About */
+.about{background:#e6057f}
+.about-grid{display:grid;gap:28px;grid-template-columns:1fr}
+.about-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.about-media img:first-child {
+  transform: translateY(20%);
+  width: 100%;
+  aspect-ratio: 4 / 3;          /* keeps both images the same proportions */
+  object-fit: cover;            /* crops images nicely to fill the frame */
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.about-media img:last-child {
+  transform: translateY(-20%);
+  width: 100%;
+  aspect-ratio: 4 / 3;          /* keeps both images the same proportions */
+  object-fit: cover;            /* crops images nicely to fill the frame */
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.about {
+  color: #fff;              /* makes all text inside the about section white */
+}
+
+.about-copy h2,
+.about-copy p,
+.about-copy strong {
+  color: #fff;
+}
+
+
+/* Product Range */
+.range{background:#f8f9fb}
+.cards{margin-top:26px;display:grid;gap:18px;grid-template-columns:1fr}
+.card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;box-shadow:var(--shadow-sm)}
+.card img{aspect-ratio:16/10;object-fit:cover}
+.card-body{padding:16px}
+.card-body h3{margin:0 0 6px;font-size:1.15rem}
+.card-body p{margin:0;color:var(--muted)}
+
+/* Testimonials */
+.testimonials{position:relative;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.testimonial-bg{position:absolute;inset:0;z-index:-1}
+.testimonial-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.5)}
+.quotes{display:grid;gap:24px;margin-top:24px}
+blockquote{background:rgba(0,0,0,.4);border-left:4px solid var(--primary);padding:16px;border-radius:12px;margin:0;font-size:1.05rem}
+cite{display:block;margin-top:8px;font-style:normal;color:#ddd;font-size:.9rem}
+
+/* Contact */
+.contact-grid{display:grid;gap:28px;grid-template-columns:1fr}
+.info.improved{display:grid;gap:18px;margin-top:20px}
+.info-block{display:flex;align-items:flex-start;gap:12px}
+.info-block i{font-size:1.3rem;color:var(--primary)}
+.info-block h4{margin:0 0 4px;font-size:1rem}
+.info-block a{color:var(--primary);text-decoration:none}
+.contact-form{border:1px solid var(--line);border-radius:16px;padding:18px;background:#fff;box-shadow:var(--shadow-sm)}
+.field{margin-bottom:12px}
+label{display:block;font-weight:600;font-size:.95rem;margin:0 0 6px}
+input,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:.8rem .95rem;font:inherit;color:inherit;background:#fff}
+input:focus,textarea:focus{outline:3px solid rgba(109,40,217,.25);border-color:var(--primary)}
+
+/* Footer */
+.site-footer{border-top:1px solid var(--line);margin-top:48px;padding:18px 0;background:#fafafa;text-align:center;font-size:.95rem}
+.site-footer a{color:var(--primary);text-decoration:none}
+
+/* Add space below static page header so logo doesn't overlap content */
+.site-header.static + main {
+  padding-top: 140px;   /* adjust if your logo grows/shrinks */
+}
+
+/* Responsive */
+@media(min-width:860px){
+  .about-grid{grid-template-columns:1fr 1fr;align-items:center}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .quotes{grid-template-columns:repeat(3,1fr)}
+  .contact-grid{grid-template-columns:1.1fr .9fr}
+}
+
+/* Prevent hero text from clashing with logo on mobile */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 220px; /* pushes text below the tall logo */
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .hdr,
+  .hero-inner,
+  .hero-copy {
+    margin-left: 0;
+    padding-left: 16px;  /* subtle mobile padding */
+  }
+}
+
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 260px; /* extra space for very small screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .hdr {
+    padding-left: 16px; /* tighter spacing for phones */
+  }
+
+  .site-header .brand {
+    margin-left: 0; /* reset extra margin if applied earlier */
+  }
+
+  .hero-inner {
+    padding-left: 16px; /* align hero text neatly with logo */
+  }
+}
+
+
